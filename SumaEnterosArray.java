@@ -17,9 +17,9 @@ public class SumaEnterosArray
   public static int[] suma (int[] num_1, int[] num_2)
   {
     if (num_1.lenght <= num_2.length)
-      int[] result = new [num_2.length + 1];
+      result = new int[num_2.length + 1];
     if (num_1.lenght > num_2.length)
-      int[] result = new [num_1.length + 1];
+      result = new int[num_1.length + 1];
 
     int i = num_1.length - 1;
     int j = num_2.length - 1;
@@ -29,7 +29,35 @@ public class SumaEnterosArray
       result[k] = num_1[i] + num_2[j];
       i--;
       j--;
-      k--; 
+      k--;
+    }
+    while (!num_1[i] && num_2[i])
+    {
+      result[k] = num_2[j];
+      i--;
+      j--;
+      k--;
+    }
+    while  (num_1[i] && !num_2[i])
+    {
+      result[k] = num_1[i];
+      i--;
+      j--;
+      k--;
+    }
+    return result[];
+  }
+  public static int[] fix(int[] result)
+  {
+    int i = result.length;
+    while (i > 0)
+    {
+      if (result[i] > 9)
+      {
+        result[i] -= 10;
+        result[i - 1]++;
+      }
+      i--;
     }
   }
   public static void main (String[] args)
@@ -38,9 +66,16 @@ public class SumaEnterosArray
     In n2 = new In(args[1]);
     int[] num_1 = n1.readAllInts();
     int[] num_2 = n2.readAllInts();
-
+    if (num_1.lenght <= num_2.length)
+      result = new int[num_2.length + 1];
+    if (num_1.lenght > num_2.length)
+      result = new int[num_1.length + 1];
     check(num_1);
     check(num_2);
     StdOut.println("Sumando; " + Arrays.toString(num_1) + Arrays.toString(num_2));
+    result = suma(num_1, num_2);
+    StdOut.println("Resultado de la suma: " + Arrays.toString(result));
+    result = fix(result);
+    StdOut.println("Resultado final: " + Arrays.toString(result));
   }
 }
