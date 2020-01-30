@@ -7,7 +7,8 @@ public class SunsetBoulevard
 {
   public static int method_A(int[] dist)
   {
-
+    int position = 0;
+    
   }
   public static int method_B(int[] dist)
   {

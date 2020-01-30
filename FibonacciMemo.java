@@ -1,7 +1,7 @@
 import edu.princeton.cs.algs4.*;
 public class FibonacciMemo
 {
-  public static long fibonacci(int n, int[] memo)
+  public static long fibonacci(int n, long[] memo)
   {
     if(n == 0)
     {
@@ -18,11 +18,10 @@ public class FibonacciMemo
   }
   public static void main(String[] args)
   {
-    memo = new long[90];
+    long[] memo = new long[90];
     for(int n = 0; n < 90; n++)
     {
       StdOut.println(n + " " + fibonacci(n, memo));
-      memo[n] = fibonacci(n, memo);
     }
   }
 }

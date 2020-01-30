@@ -14,51 +14,46 @@ public class SumaEnterosArray
         System.exit(1);
       }
   }
-  public static int[] suma (int[] num_1, int[] num_2)
+  public static int[] suma (int[] num_1, int[] num_2, int[] result)
   {
-    if (num_1.lenght <= num_2.length)
-      result = new int[num_2.length + 1];
-    if (num_1.lenght > num_2.length)
-      result = new int[num_1.length + 1];
-
     int i = num_1.length - 1;
     int j = num_2.length - 1;
-    int k = result.length - 1;
-    while (num_1[i] && num_2[j])
+    for (int k = result.length - 1; k >= 0; k--)
     {
-      result[k] = num_1[i] + num_2[j];
-      i--;
-      j--;
-      k--;
+      if (i < 0 && j < 0)
+      {
+        result[k] = 0;
+      }
+      else if (i > 0 && j < 0)
+      {
+        result[k] = num_1[i];
+        i--;
+      }
+      else if (i < 0 && j > 0)
+      {
+        result[k] = num_2[j];
+        j--;
+      }
+      else
+      {
+        result[k] = num_1[i] + num_2[j];
+        i--;
+        j--;
+      }
     }
-    while (!num_1[i] && num_2[i])
-    {
-      result[k] = num_2[j];
-      i--;
-      j--;
-      k--;
-    }
-    while  (num_1[i] && !num_2[i])
-    {
-      result[k] = num_1[i];
-      i--;
-      j--;
-      k--;
-    }
-    return result[];
+    return result;
   }
   public static int[] fix(int[] result)
   {
-    int i = result.length;
-    while (i > 0)
+    for (int i = result.length - 1; i > 0; i--)
     {
       if (result[i] > 9)
       {
         result[i] -= 10;
         result[i - 1]++;
       }
-      i--;
     }
+    return result;
   }
   public static void main (String[] args)
   {
@@ -66,14 +61,15 @@ public class SumaEnterosArray
     In n2 = new In(args[1]);
     int[] num_1 = n1.readAllInts();
     int[] num_2 = n2.readAllInts();
-    if (num_1.lenght <= num_2.length)
+    int[] result;
+    if (num_1.length <= num_2.length)
       result = new int[num_2.length + 1];
-    if (num_1.lenght > num_2.length)
+    else
       result = new int[num_1.length + 1];
     check(num_1);
     check(num_2);
     StdOut.println("Sumando; " + Arrays.toString(num_1) + Arrays.toString(num_2));
-    result = suma(num_1, num_2);
+    result = suma(num_1, num_2, result);
     StdOut.println("Resultado de la suma: " + Arrays.toString(result));
     result = fix(result);
     StdOut.println("Resultado final: " + Arrays.toString(result));
