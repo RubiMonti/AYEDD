@@ -10,7 +10,7 @@ public class SumaEnterosArray
     for (int i = 0; i < num.length; i++)
       if (num[i] > 9 || num[i] < 0)
       {
-        System.err.println("Error: el número proporcionado no existe");
+        System.err.println("Error: El número proporcionado no existe");
         System.exit(1);
       }
   }
@@ -24,12 +24,12 @@ public class SumaEnterosArray
       {
         result[k] = 0;
       }
-      else if (i > 0 && j < 0)
+      else if (j < 0)
       {
         result[k] = num_1[i];
         i--;
       }
-      else if (i < 0 && j > 0)
+      else if (i < 0)
       {
         result[k] = num_2[j];
         j--;
@@ -53,7 +53,13 @@ public class SumaEnterosArray
         result[i - 1]++;
       }
     }
-    return result;
+    int skip = 0;
+    while (result[skip] == 0)
+      skip++;
+    int[] end = new int[result.length - skip];
+    for (int i = 0; i < end.length; i++)
+        end[i] = result[i + skip];
+    return end;
   }
   public static void main (String[] args)
   {
@@ -70,7 +76,6 @@ public class SumaEnterosArray
     check(num_2);
     StdOut.println("Sumando; " + Arrays.toString(num_1) + Arrays.toString(num_2));
     result = suma(num_1, num_2, result);
-    StdOut.println("Resultado de la suma: " + Arrays.toString(result));
     result = fix(result);
     StdOut.println("Resultado final: " + Arrays.toString(result));
   }

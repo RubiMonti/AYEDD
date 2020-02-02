@@ -13,34 +13,32 @@ public class SunsetBoulevard
       distance = distance * (-1);
     return distance;
   }
-  public static int nearest_distance(int point_A, int[] distances)
+  public static int[] nearest_distance(int position)
   {
-    int minimum_distance = 100000
-    int index = -1
-    for (int i = 0; i < distances.length; i++)
+    int minimum = 0;
+    for (int i = 0;i < dist.length; i++)
     {
-      if (distance(point_A, distances[i]) < minimum_distance)
+      if (distance(position,dist[i]) < minimum)
       {
-        minimum_distance = distance(point_A, distances[i]);
         index = i;
-    }
-    if (minimum_distance == 100000)
-      return -1;
-    else
-    {
-      distances[index] = 100001
-      return minimum_distance
+        minimum = distance(0, dist[i]);
+      }
     }
   }
   public static int method_A(int[] dist)
   {
-    int position = 0;
-    if nearest_distance(position)
+    int travelled = 0;
+    int index = 0;
+    travelled = minimum;
+    int distancia = 0;
+    while distancia < 500
+    {
+
+    }
   }
   public static int method_B(int[] dist)
   {
     int travelled = distance(0,dist[0]);
-    int position = dist[0];
     for (int i = 1;i < dist.length; i++)
       travelled += distance(dist[i-1], dist[i]);
     travelled += distance(dist[dist.length - 1], 0);
