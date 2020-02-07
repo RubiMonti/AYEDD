@@ -17,7 +17,11 @@ public class ClienteInterval2D
     {
         // Hay que probar este código para ver como lee los numeros y como los almacena. Dependiendo de la forma de estructurarlo habra que crear una funcion para que los separe en los rectangulos.
         In in = new In(args[0]);
-        float[] rectangulos = in.readAllInts();
+        float[] rectangulos = in.readAllInts(); //Habria que hallar la forma de leer los floats de un archivo
         StdOut.println(Arrays.toString(rectangulos));
+
+        /*
+        Una vez metidos los datos del fichero 
+        */
     }
 }
