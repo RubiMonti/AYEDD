@@ -34,17 +34,15 @@ public class Rational
             den = denominator;
         }
     }
+    public Rational (int number)
+    {
+        num = number;
+        den = 1;
+    }
     /*
     En un primer lugar tenemos las funciones que nos ayudaran con las operaciones matemáticas y que 
     el cliente no tiene porque utilizar en su programa
     */
-
-    private Rational Common_Denominator (Rational b)
-    {
-        num *= b.denominator();
-        den *= b.denominator();
-        return (this);
-    }
 
     private int MCD(int a, int b) 
     {
@@ -66,8 +64,9 @@ public class Rational
 
     public Rational reduce()
     {
-        num /= MCD(num, den);
-        den /= MCD(num, den);
+        Rational swap = new Rational(num, den);
+        num /= MCD(swap.numerator(), swap.denominator());
+        den /= MCD(swap.numerator(), swap.denominator());
         return (this);
     }
 
@@ -79,13 +78,12 @@ public class Rational
 
     public Rational plus(Rational b)
     {
-        Rational sumando;
-        sumando = new Rational (b.numerator(), b.denominator());
-        this.Common_Denominator(sumando);
-        sumando.Common_Denominator(this);
-        num += sumando.numerator();
-        this.reduce();
-        return (this);
+        int n, d;
+        n = ((this.numerator() * b.denominator()) + (b.numerator() * this.denominator()));
+        d = (this.denominator() * b.denominator());
+        Rational toreturn = new Rational(n, d);
+        toreturn.reduce();
+        return (toreturn);
     }
 
     public Rational minus()
