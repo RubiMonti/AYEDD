@@ -13,19 +13,21 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class ClienteInterval2D 
 {
+    private double[] next_rect(double[] rectaungulos)
+    {
+        // creamos un punto con rectangulos[0-3]
+        double[] new_rectagulos = new double[rectaungulos.length - 4];
+        for (int i = 4; i < rectaungulos.length; i++)
+            new_rectagulos[i - 4] = rectaungulos[i];
+            return (new_rectagulos);
+    }
     public static void main(String[] args)
     {
         In in = new In(args[0]);
         double[] rectangulos = in.readAllDoubles();
+        // Aqui creamos las variables que almacenaran los puntos de los retangulos.
         StdOut.println(Arrays.toString(rectangulos));
 
-        /*
-        Una vez metidos los datos del fichero 
-        */
-        if (rectangulos.length % 4 != 0)
-        {
-            System.err.println("Error: El archivo proporcionado no cumple el formato establecido.");
-            System.exit(1);
-        }
+        next_rect(rectangulos);
     }
 }
