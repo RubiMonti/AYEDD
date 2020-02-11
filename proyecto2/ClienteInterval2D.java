@@ -15,13 +15,17 @@ public class ClienteInterval2D
 {
     public static void main(String[] args)
     {
-        // Hay que probar este código para ver como lee los numeros y como los almacena. Dependiendo de la forma de estructurarlo habra que crear una funcion para que los separe en los rectangulos.
         In in = new In(args[0]);
-        float[] rectangulos = in.readAllInts(); //Habria que hallar la forma de leer los floats de un archivo
+        double[] rectangulos = in.readAllDoubles();
         StdOut.println(Arrays.toString(rectangulos));
 
         /*
         Una vez metidos los datos del fichero 
         */
+        if (rectangulos.length % 4 != 0)
+        {
+            System.err.println("Error: El archivo proporcionado no cumple el formato establecido.");
+            System.exit(1);
+        }
     }
 }
