@@ -6,7 +6,6 @@ y a dar una solución de dicho tipo. Para ello usaremos el TAD del proyecto ante
 */
 
 import java.util.Arrays;
-import edu.princeton.cs.algs4.Counter;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
