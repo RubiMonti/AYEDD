@@ -17,8 +17,10 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class RationalClient
 {
+    /*
     private static Rational[] get_num (String arg)
     {
+        //Hay que cambiar toda esta función por parseRational
         Rational[] toreturn = new Rational[2];
         char[] numbers = arg.toCharArray();
         if (arg.length() == 5)
@@ -60,6 +62,7 @@ public class RationalClient
         }
         return toreturn;
     }
+    */
     public static void main(String[] args)
     {
         String arg = new String();
@@ -67,9 +70,19 @@ public class RationalClient
         {
             arg += args[i];
         }
-        Rational num1 = get_num(arg)[0];
-        Rational num2 = get_num(arg)[1];
-        Rational toreturn = new Rational(num2.numerator(), num2.denominator());
+        Rational num1 = new Rational(0);
+        arg = num1.parseRational(arg);
+        Rational toreturn;
+        while (/* No se que poner aqui para que pare */)
+        {
+            if (arg.startsWith("x") || arg.startsWith("") || arg.startsWith("x") || arg.startsWith("x"))
+            {
+                arg.split(" ");
+                Rational num2 = new Rational(0);
+                arg = num2.parseRational(arg);
+            }
+        }
+        /*
         if (arg.contains("+"))
         {
             toreturn = toreturn.plus(num1);
@@ -92,5 +105,6 @@ public class RationalClient
             toreturn = toreturn.times(num1);
             StdOut.println(num1.toString() + " / " + num2.toString() + " = " + toreturn.toString());
         }
+        */
     }
 }
