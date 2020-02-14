@@ -17,94 +17,63 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class RationalClient
 {
-    /*
-    private static Rational[] get_num (String arg)
-    {
-        //Hay que cambiar toda esta función por parseRational
-        Rational[] toreturn = new Rational[2];
-        char[] numbers = arg.toCharArray();
-        if (arg.length() == 5)
-        {
-            Rational num1 = new Rational(numbers[0] - '0', numbers[1] - '0');
-            Rational num2 = new Rational(numbers[3] - '0', numbers[4] - '0');
-            toreturn[0] = num1;
-            toreturn[1] = num2;
-            return(toreturn);
-        }
-        else if (arg.length() == 4)
-        {
-            if (!(numbers[1] < '0' || numbers[1] > '9'))
-            {
-                Rational num1 = new Rational(numbers[0] - '0', numbers[1] - '0');
-                Rational num2 = new Rational(numbers[3] - '0');
-                toreturn[0] = num1;
-                toreturn[1] = num2;
-                return(toreturn);
-            }
-            else if (!(numbers[2] < '0' || numbers[2] > '9'))
-            {
-                Rational num1 = new Rational(numbers[0] - '0');
-                Rational num2 = new Rational(numbers[2] - '0', numbers[3] - '0');
-                toreturn[0] = num1;
-                toreturn[1] = num2;
-                return(toreturn);
-            }
-            else
-            {
-                System.err.println("Error: Los números proporcionados no son Rational");
-                System.exit(1);
-            }
-        }
-        else
-        {
-            System.err.println("Error: Los números proporcionados no son Rational");
-            System.exit(1);
-        }
-        return toreturn;
-    }
-    */
     public static void main(String[] args)
     {
         String arg = new String();
         for (int i = 0; i<args.length; i++)
         {
-            arg += args[i];
+            arg += args[i] + " ";
         }
+        System.err.println("Traza: arg = " + arg);
         Rational num1 = new Rational(0);
+        Rational num2 = new Rational(0);
+        Rational toprint;
+        String operator = "Error";
         arg = num1.parseRational(arg);
-        Rational toreturn;
-        while (/* No se que poner aqui para que pare */)
+        toprint = new Rational(num1.numerator(), num1.denominator()); 
+        System.err.println("Traza: arg = " + arg);
+        while (arg.contains(" "))
         {
-            if (arg.startsWith("x") || arg.startsWith("") || arg.startsWith("x") || arg.startsWith("x"))
+            System.err.println("Traza: arg = " + arg);
+            if (arg.startsWith("+"))
             {
-                arg.split(" ");
-                Rational num2 = new Rational(0);
+                operator = " + ";
+                arg = arg.substring(arg.indexOf(" "));
                 arg = num2.parseRational(arg);
+                toprint = toprint.plus(num2);
+            }
+            else if (arg.startsWith("-"))
+            {
+                operator = " - ";
+                arg = arg.substring(arg.indexOf(" "));
+                arg = num2.parseRational(arg);
+                num2.minus();
+                toprint = toprint.plus(num2);
+                num2.minus();
+            }
+            else if (arg.startsWith("x"))
+            {
+                operator = " x ";
+                arg = arg.substring(arg.indexOf(" "));
+                arg = num2.parseRational(arg);
+                toprint = toprint.times(num2);
+            }
+            else if (arg.startsWith("/"))
+            {
+                operator = " / ";
+                arg = arg.substring(arg.indexOf(" "));
+                System.err.println("Traza: arg = " + arg);
+                arg = num2.parseRational(arg);
+                num2.invert();
+                toprint = toprint.times(num2);
+                num2.invert();
+            }
+            else
+            {
+                System.err.println("Algo ocurrio, revisa el bucle while de recibir argumentos");
+                System.exit(1);
             }
         }
-        /*
-        if (arg.contains("+"))
-        {
-            toreturn = toreturn.plus(num1);
-            StdOut.println(num1.toString() + " + " + num2.toString() + " = " + toreturn.toString());
-        }
-        if (arg.contains("-"))
-        {
-            toreturn = toreturn.minus();
-            toreturn = toreturn.plus(num1);
-            StdOut.println(num1.toString() + " - " + num2.toString() + " = " + toreturn.toString());
-        }
-        if (arg.contains("x"))
-        {
-            toreturn = toreturn.times(num1);
-            StdOut.println(num1.toString() + " x " + num2.toString() + " = " + toreturn.toString());
-        }
-        if (arg.contains("/"))
-        {
-            toreturn = toreturn.invert();
-            toreturn = toreturn.times(num1);
-            StdOut.println(num1.toString() + " / " + num2.toString() + " = " + toreturn.toString());
-        }
-        */
+        StdOut.println(num1.toString() + operator + num2.toString() + " = " + toprint);
     }
 }

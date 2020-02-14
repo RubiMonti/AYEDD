@@ -72,7 +72,7 @@ public class Rational
                 return (toreturn);
             }
         }
-        toreturn[0] = "Error";
+        toreturn[0] = s;
         toreturn[1] = "Error";
         return (toreturn);
     }
@@ -148,7 +148,7 @@ public class Rational
     public String toString()
     {
         String fraction;
-        fraction = num + "/" + den;
+        fraction = "(" + num + "/" + den + ")";
         return (fraction);
     }
 
@@ -156,23 +156,25 @@ public class Rational
     {
         int number = 0;
         String prefix;
-        s.trim();
-        for ( int i = 0; i < 2; i++)
+        s = s.trim();
+        for (int i = 0; i < 2; i++)
         {
             prefix = str_split(s, ' ')[0];
+            System.err.println("Traza: prefix = " + prefix);
             s = str_split(s, ' ')[1];
             try {
                 number = Integer.parseInt(prefix);
             } 
             catch (Exception e) {
-                System.err.println("Error: No se pudo transformar el string a integer.");
+                System.err.println("Rational, Error: No se pudo transformar el string a integer.");
                 System.exit(1);
             }
             if (i == 0) 
                 this.num = number;
             else
                 this.den = number;
-            s.trim();
+            s = s.trim();
+            System.err.println("Traza: s = " + s);
         }
         return (s);
     }
