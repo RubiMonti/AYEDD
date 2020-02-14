@@ -39,6 +39,7 @@ public class Rational
         num = number;
         den = 1;
     }
+
     /*
     En un primer lugar tenemos las funciones que nos ayudaran con las operaciones matemáticas y que 
     el cliente no tiene porque utilizar en su programa
@@ -55,6 +56,25 @@ public class Rational
             resto = a % b;
         }
         return (b);
+    }
+
+    private String[] str_split(String s, char c)
+    {
+        // Esta funcion nos devuelve dos strings que son sacados de partir en dos el String pasado como parámetro por el carácter pasado como parametro.
+        // El carácter pasado como parámetro se encuentra en el segundo string. En caso de no encontrar el carácter devolverá dos Strings con Error.
+        String[] toreturn = new String[2];
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (s.charAt(i) == c)
+            {
+                toreturn[0] = s.substring(0,i);
+                toreturn[1] = s.substring(i);
+                return (toreturn);
+            }
+        }
+        toreturn[0] = s;
+        toreturn[1] = "Error";
+        return (toreturn);
     }
 
     /*
@@ -128,7 +148,34 @@ public class Rational
     public String toString()
     {
         String fraction;
-        fraction = num + "/" + den;
+        fraction = "(" + num + "/" + den + ")";
         return (fraction);
+    }
+
+    public String parseRational(String s)
+    {
+        int number = 0;
+        String prefix;
+        s = s.trim();
+        for (int i = 0; i < 2; i++)
+        {
+            prefix = str_split(s, ' ')[0];
+            System.err.println("Traza: prefix = " + prefix);
+            s = str_split(s, ' ')[1];
+            try {
+                number = Integer.parseInt(prefix);
+            } 
+            catch (Exception e) {
+                System.err.println("Rational, Error: No se pudo transformar el string a integer.");
+                System.exit(1);
+            }
+            if (i == 0) 
+                this.num = number;
+            else
+                this.den = number;
+            s = s.trim();
+            System.err.println("Traza: s = " + s);
+        }
+        return (s);
     }
 }
