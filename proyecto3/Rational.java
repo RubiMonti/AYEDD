@@ -87,6 +87,11 @@ public class Rational
         Rational swap = new Rational(num, den);
         num /= MCD(swap.numerator(), swap.denominator());
         den /= MCD(swap.numerator(), swap.denominator());
+        if (den < 0)
+        {
+            num *= -1;
+            den *= -1;
+        }
         return (this);
     }
 
@@ -148,34 +153,62 @@ public class Rational
     public String toString()
     {
         String fraction;
-        fraction = "(" + num + "/" + den + ")";
+        if (den != 1)
+            fraction = "(" + num + "/" + den + ")";
+        else
+            fraction = "(" + num + ")";
         return (fraction);
     }
 
     public String parseRational(String s)
     {
         int number = 0;
+        String t;
         String prefix;
-        s = s.trim();
+        t = s.trim();
         for (int i = 0; i < 2; i++)
         {
-            prefix = str_split(s, ' ')[0];
-            System.err.println("Traza: prefix = " + prefix);
-            s = str_split(s, ' ')[1];
-            try {
-                number = Integer.parseInt(prefix);
-            } 
-            catch (Exception e) {
-                System.err.println("Rational, Error: No se pudo transformar el string a integer.");
-                System.exit(1);
+            prefix = str_split(t, ' ')[0];
+            t = str_split(t, ' ')[1];
+            if (i == 0)
+            {
+                try {
+                    number = Integer.parseInt(prefix);
+                    this.num = number;
+                } 
+                catch (Exception e) {
+                    System.err.println("Rational, Error: No se pudo transformar el string a integer.");
+                    System.exit(1);
+                }
             }
-            if (i == 0) 
-                this.num = number;
             else
-                this.den = number;
-            s = s.trim();
-            System.err.println("Traza: s = " + s);
+            {
+                try {
+                    number = Integer.parseInt(prefix);
+                    this.den = number;
+                } 
+                catch (Exception e) {
+                    if (prefix.equals("+") || prefix.equals("-") || prefix.equals("x") || prefix.equals("/"))
+                    {
+                        t = prefix + t;
+                        this.den = 1;
+                    }
+                    else
+                    {
+                        System.err.println("Rational, Error: No se pudo transformar el string a integer.");
+                        System.exit(1);
+                    }
+                } 
+            }
+            t = t.trim();
         }
-        return (s);
+        if (s.equals(t))
+        {
+            System.err.println("Rational, Error: No se encontró ningun Rational en el string.");
+            System.exit(1);
+        }
+        else
+            return (t);
+        return(t);
     }
 }
