@@ -68,15 +68,20 @@ public class SumaEnterosArray
     int[] num_1 = n1.readAllInts();
     int[] num_2 = n2.readAllInts();
     int[] result;
+    if (num_1 == null || num_2 == null)
+    {
+      System.err.println("Error: No se han proporcionado suficientes números.");
+      System.exit(1);
+    }
     if (num_1.length <= num_2.length)
       result = new int[num_2.length + 1];
     else
       result = new int[num_1.length + 1];
     check(num_1);
     check(num_2);
-    StdOut.println("Sumando; " + Arrays.toString(num_1) + Arrays.toString(num_2));
+    //StdOut.println("Sumando; " + Arrays.toString(num_1) + Arrays.toString(num_2));
     result = suma(num_1, num_2, result);
     result = fix(result);
-    StdOut.println("Resultado final: " + Arrays.toString(result));
+    StdOut.println(Arrays.toString(result));
   }
 }
