@@ -193,6 +193,8 @@ public class Rational
                         t = prefix + t;
                         this.den = 1;
                     }
+                    else if (prefix.equals("Error"))
+                        this.den = 1;
                     else
                     {
                         System.err.println("Rational, Error: No se pudo transformar el string a integer.");

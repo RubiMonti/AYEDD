@@ -11,8 +11,6 @@ del terminal o la salida estandar.
 */
 
 import java.util.Arrays;
-import java.util.EventListener;
-
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;

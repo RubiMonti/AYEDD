@@ -38,15 +38,10 @@ public class RationalExpression
 
     public String toString()
     {
-        if (operators.length == 0)
-            return (operands[0].toString());
-        else
-        {
-            String toreturn =  operands[0].toString();
-            for (int i = 0; i < operators.length; i++)
-                toreturn += operators[i] + operands[i + 1];
-            return (toreturn);
-        }
+        String toreturn =  operands[0].toString();
+        for (int i = 0; i < operators.length; i++)
+            toreturn += operators[i] + operands[i + 1];
+        return (toreturn);
     }
 
     public boolean equals(Object b)
@@ -66,69 +61,165 @@ public class RationalExpression
         }
     }
 
+    public Rational getResult()
+    {
+        if (operators.length == 0)
+            return(operands[0]);
+        // Vamos a crear copias de operands y operator para no cambiarlas durante el proceso.
+        Rational[] c_operands = new Rational[operands.length];
+        for (int i = 0; i < operands.length ; i++)
+            c_operands[i] = operands[i];
+        String[] c_operators = new String[operators.length];
+        for (int i = 0; i < operators.length ; i++)
+            c_operators[i] = operators[i];
+        Boolean found = false;
+        Boolean found2 = false;
+
+        while (c_operators.length > 0)
+        {
+            Rational[] auxR = new Rational[c_operands.length - 1];
+            String[] auxS = new String[c_operators.length - 1];
+            // Ir recorriendo el array de operadoires comparande
+            for (int i = 0; i < c_operators.length; i++)
+            {
+                if (!found)
+                {
+                    if (c_operators[i].equals(" x "))
+                    {
+                        auxR[i] = c_operands[i].times(c_operands[i + 1]);
+                        found = true;
+                    }
+                    else if (c_operators[i].equals(" / "))
+                    {
+                        c_operands[i + 1] = c_operands[i + 1].invert();
+                        auxR[i] = c_operands[i].times(c_operands[i + 1]);
+                        found = true;
+                    }
+                    else
+                    {
+                        if (i == auxS.length)
+                            break;
+                        else 
+                        {
+                            auxR[i] = c_operands[i];
+                            auxS[i] = c_operators[i];    
+                        }
+                    }
+                }
+                else
+                {
+                    auxR[i] = c_operands[i + 1];
+                    auxS[i - 1] = c_operators[i];   
+                }
+            }
+            for (int i = 0; i < c_operators.length; i++)
+            {
+                if (!found)
+                {
+                    if (!found2)
+                    {
+                        if (c_operators[i].equals(" + "))
+                        {
+                            auxR[i] = c_operands[i].plus(c_operands[i + 1]);
+                            found2 = true;
+                        }
+                        else if (c_operators[i].equals(" - "))
+                        {
+                            c_operands[i + 1] = c_operands[i + 1].minus();
+                            auxR[i] = c_operands[i].plus(c_operands[i + 1]);
+                            found2 = true;
+                        }
+                        else
+                        {
+                            auxR[i] = c_operands[i];
+                            auxS[i] = c_operators[i];    
+                        }
+                    }
+                    else
+                    {
+                        auxR[i] = c_operands[i + 1];
+                        auxS[i - 1] = c_operators[i];
+                    }
+                }
+            }
+            c_operands = new Rational[c_operands.length - 1];
+            for (int i = 0; i < c_operands.length ; i++)
+                c_operands[i] = auxR[i];
+            c_operators = new String[c_operators.length - 1];
+            for (int i = 0; i < c_operators.length ; i++)
+                c_operators[i] = auxS[i];
+            found = false;
+            found2 = false;
+        }
+        return (c_operands[0]);
+    }
+
     public String parseRationalExpressions(String s)
     {
         int count = 0;
         for(int i = 0; i < s.length(); i++)
         {
-            if (s.charAt(i) == "+" || s.charAt(i) == "-" || s.charAt(i) == "x" || s.charAt(i) == "/")
+            if (s.charAt(i) == '+' || s.charAt(i) == 'x' || s.charAt(i) == '/')
                 count ++;
+            else if(s.charAt(i) == '-')
+            {
+                if (s.charAt(i + 1) == ' ')
+                    count++;
+            }
         }
-        Rational num1 = new Rational(0);
-        String operator = "Error";
-        s = num1.parseRational(s);
-        operands[0] = num1;
+        int i = 0;
+        operands = new Rational[count + 1];
+        operators = new String[count];
+        Rational aux = new Rational(0);
+        s = aux.parseRational(s);
+        operands[0] = new Rational(aux.numerator(), aux.denominator());
         if (s.contains(" "))
         {
             while (s.contains(" "))
             {
                 if (s.startsWith("+"))
                 {
-                    operator = " + ";
+                    operators[i] = " + ";
                     s = s.substring(s.indexOf(" "));
-                    s = num2.parseRational(s);
-                    toprint = toprint.plus(num2);
+                    s = aux.parseRational(s);
+                    operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }
                 else if (s.startsWith("-"))
                 {
-                    operator = " - ";
+                    operators[i] = " - ";
                     s = s.substring(s.indexOf(" "));
-                    s = num2.parseRational(s);
-                    num2.minus();
-                    toprint = toprint.plus(num2);
-                    if (toprint.denominator() < 0)
-                        toprint.reduce();
-                    num2.minus();
+                    s = aux.parseRational(s);
+                    operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }
                 else if (s.startsWith("x"))
                 {
-                    operator = " x ";
+                    operators[i] = " x ";
                     s = s.substring(s.indexOf(" "));
-                    s = num2.parseRational(s);
-                    toprint = toprint.times(num2);
+                    s = aux.parseRational(s);
+                    operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }
                 else if (s.startsWith("/"))
                 {
-                    operator = " / ";
+                    operators[i] = " / ";
                     s = s.substring(s.indexOf(" "));
-                    s = num2.parseRational(s);
-                    num2.invert();
-                    toprint = toprint.times(num2);
-                    num2.invert();
+                    s = aux.parseRational(s);
+                    operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }
                 else
                 {
                     System.err.println("Algo ocurrio, revisa el bucle while de recibir argumentos");
                     System.exit(1);
                 }
+                i++;
+            }
+            s = s.trim();
+            if (!(s.equals("Error")))
+            {
+                System.err.println("Error: Los numeros racionales introducidos no son correctos.");
+                System.exit(1);
             }
         }
-        else
-        {
-            System.err.println("No se recibieron suficientes argumentos");
-            System.exit(1);
-        }
-        StdOut.println(num1.toString() + operator + num2.toString() + " = " + toprint);
+        return (this.toString());
     }
 
     public static void main(String[] args)
@@ -230,13 +321,11 @@ public class RationalExpression
         RationalExpression exp2 = new RationalExpression(exp2s, exp2t);
         RationalExpression exp3 = new RationalExpression(exp3s, exp3t);
         RationalExpression exp4 = new RationalExpression(exp4s, exp4t);
-        StdOut.println("expresion 1 = " + exp1.toString());
-        StdOut.println("expresion 2 = " + exp2.toString());
         StdOut.println("expresion 3 = " + exp3.toString());
-        StdOut.println("expresion 4 = " + exp4.toString());
-        StdOut.println("expresion 1 = expresion 2 : " + exp1.equals(exp2));
-        StdOut.println("expresion 1 = expresion 3 : " + exp1.equals(exp3));
-        StdOut.println("expresion 1 = expresion 4 : " + exp1.equals(exp4));
-        StdOut.println("expresion 2 = expresion 1 : " + exp2.equals(exp1));
+        StdOut.println("expresion 1 = " + exp1.toString() + "es igual a : " + exp1.getResult().toString());
+        StdOut.println("expresion 2 = " + exp2.toString() + "es igual a : " + exp2.getResult().toString());
+        StdOut.println("expresion 3 = " + exp3.toString() + "es igual a : " + exp3.getResult().toString());
+        StdOut.println("expresion 4 = " + exp4.toString() + "es igual a : " + exp4.getResult().toString());
+
     }
 }
