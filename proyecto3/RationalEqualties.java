@@ -30,6 +30,9 @@ public class RationalEqualties
             expressions = line.split("==");
             exp1.parseRationalExpressions(expressions[0]);
             exp2.parseRationalExpressions(expressions[1]);
+            StdOut.println(exp1.toString() + " ?? " + exp2.toString());
+            StdOut.println(exp1.toString() + " = " + exp1.getResult());
+            StdOut.println(exp2.toString() + " = " + exp2.getResult());
             if (exp1.getResult().equals(exp2.getResult()))
                 equals = " == ";
             StdOut.println(exp1.toString() + equals + exp2.toString());
