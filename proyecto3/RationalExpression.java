@@ -64,11 +64,15 @@ public class RationalExpression
     public Rational getResult()
     {
         if (operators.length == 0)
-            return(operands[0]);
+        {
+            Rational toreturn = new Rational(operands[0].numerator(), operands[0].denominator());
+            toreturn = operands[0].reduce();
+            return(toreturn);
+        }
         // Vamos a crear copias de operands y operator para no cambiarlas durante el proceso.
         Rational[] c_operands = new Rational[operands.length];
         for (int i = 0; i < operands.length ; i++)
-            c_operands[i] = operands[i];
+            c_operands[i] = new Rational(operands[i].numerator(), operands[i].denominator());
         String[] c_operators = new String[operators.length];
         for (int i = 0; i < operators.length ; i++)
             c_operators[i] = operators[i];
@@ -151,6 +155,7 @@ public class RationalExpression
             found = false;
             found2 = false;
         }
+        c_operands[0] = c_operands[0].reduce();
         return (c_operands[0]);
     }
 
@@ -180,28 +185,28 @@ public class RationalExpression
                 if (s.startsWith("+"))
                 {
                     operators[i] = " + ";
-                    s = s.substring(s.indexOf(" "));
+                    s = s.substring(1);
                     s = aux.parseRational(s);
                     operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }
                 else if (s.startsWith("-"))
                 {
                     operators[i] = " - ";
-                    s = s.substring(s.indexOf(" "));
+                    s = s.substring(1);
                     s = aux.parseRational(s);
                     operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }
                 else if (s.startsWith("x"))
                 {
                     operators[i] = " x ";
-                    s = s.substring(s.indexOf(" "));
+                    s = s.substring(1);
                     s = aux.parseRational(s);
                     operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }
                 else if (s.startsWith("/"))
                 {
                     operators[i] = " / ";
-                    s = s.substring(s.indexOf(" "));
+                    s = s.substring(1);
                     s = aux.parseRational(s);
                     operands[i + 1] = new Rational(aux.numerator(), aux.denominator());
                 }

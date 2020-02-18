@@ -87,12 +87,17 @@ public class Rational
         Rational swap = new Rational(num, den);
         num /= MCD(swap.numerator(), swap.denominator());
         den /= MCD(swap.numerator(), swap.denominator());
+        if (num == 0)
+            den = 1;
         if (den < 0)
         {
             num *= -1;
             den *= -1;
         }
-        return (this);
+        Rational toreturn = new Rational(num, den);
+        num = swap.numerator();
+        den = swap.denominator();
+        return (toreturn);
     }
 
     public int numerator()
