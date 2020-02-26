@@ -62,20 +62,21 @@ public class ClienteInterval2D
         String line;
         System.err.println("KLK");
         int i = 0;
+        Interval1D xInterval;
+        Interval1D yInterval;
+        Interval2D rect;
         while (in.hasNextLine())
         {
             line = in.readLine();
             rectangulos = new Double[4];
             System.err.println(i + " " + line);
             rectangulos = next_rect(line);
-            for (int j = 0; j < rectangulos.length ; j++)
-                System.err.println(rectangulos[j]);
-            Interval1D xInterval = new Interval1D(rectangulos[0], rectangulos[1]);
-            Interval1D yInterval = new Interval1D(rectangulos[2], rectangulos[3]);
-            Interval2D rect = new Interval2D(xInterval, yInterval);
+            System.err.println(Arrays.toString(rectangulos));
+            xInterval = new Interval1D(rectangulos[0], rectangulos[2]);
+            yInterval = new Interval1D(rectangulos[1], rectangulos[3]);
+            rect = new Interval2D(xInterval, yInterval);
             rect.draw();
             i++;
         }
-        System.err.println(rectangulos.toString());
     }
 }

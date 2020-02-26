@@ -28,6 +28,11 @@ public class RationalClient
         Rational num2 = new Rational(0);
         Rational toprint;
         String operator = "Error";
+        if (arg.startsWith("+") || arg.startsWith("-") || arg.startsWith("x") || arg.startsWith("/"))
+        {
+            System.err.println("No se recibieron suficientes argumentos");
+            System.exit(1);
+        }
         arg = num1.parseRational(arg);
         toprint = new Rational(num1.numerator(), num1.denominator());
         if (arg.contains(" "))

@@ -153,7 +153,7 @@ public class Rational
     public String toString()
     {
         String fraction;
-        if (den != 1)
+        if (num != 0)
             fraction = "(" + num + "/" + den + ")";
         else
             fraction = "(" + num + ")";
@@ -168,8 +168,16 @@ public class Rational
         t = s.trim();
         for (int i = 0; i < 2; i++)
         {
-            prefix = str_split(t, ' ')[0];
-            t = str_split(t, ' ')[1];
+            if (t.contains(" "))
+            {
+                prefix = str_split(t, ' ')[0];
+                t = str_split(t, ' ')[1];
+            }
+            else
+            {
+                prefix = t;
+                t = "";
+            }
             if (i == 0)
             {
                 try {
@@ -188,7 +196,7 @@ public class Rational
                     this.den = number;
                 } 
                 catch (Exception e) {
-                    if (prefix.equals("+") || prefix.equals("-") || prefix.equals("x") || prefix.equals("/"))
+                    if (prefix.equals("+") || prefix.equals("-") || prefix.equals("x") || prefix.equals("/") || prefix.equals(""))
                     {
                         t = prefix + t;
                         this.den = 1;
