@@ -7,6 +7,8 @@ ellos son secantes o si hay alguno contenido en otro.
 */
 
 import java.util.Arrays;
+import java.util.TooManyListenersException;
+
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -55,28 +57,55 @@ public class ClienteInterval2D
         }
         return (toreturn);
     }
+
+    public static Interval2D[] new_rectangle(Interval2D[] rects)
+    {
+        Interval2D[] toreturn = new Interval2D[rects.length + 1];
+        for (int i = 0; i < rects.length; i++)
+            toreturn[i] = rects[i];
+        return (toreturn);
+    }
     public static void main(String[] args)
     {
         In in = new In(args[0]);
-        Double[] rectangulos = new Double[4];
+        Double[] points = new Double[4];
         String line;
         System.err.println("KLK");
         int i = 0;
         Interval1D xInterval;
         Interval1D yInterval;
         Interval2D rect;
+        Interval2D[] rectangulos = new Interval2D[0];
         while (in.hasNextLine())
         {
             line = in.readLine();
-            rectangulos = new Double[4];
+            points = new Double[4];
             System.err.println(i + " " + line);
-            rectangulos = next_rect(line);
-            System.err.println(Arrays.toString(rectangulos));
-            xInterval = new Interval1D(rectangulos[0], rectangulos[2]);
-            yInterval = new Interval1D(rectangulos[1], rectangulos[3]);
+            points = next_rect(line);
+            for (int j = 0; j < points.length ; j++)
+                System.err.println(points[j]);
+            xInterval = new Interval1D(points[0], points[2]);
+            yInterval = new Interval1D(points[1], points[3]);
             rect = new Interval2D(xInterval, yInterval);
+            rectangulos = new_rectangle(rectangulos);
+            rectangulos[i] = rect;
             rect.draw();
             i++;
         }
+        System.err.println(rectangulos.length);
+        int intersects = 0;
+        int inside = 0;
+        for (int j = 0; j < rectangulos.length - 1; j++)
+        {
+            for (int k = j + 1; k < rectangulos.length ; k++)
+            {
+                if (rectangulos[j].intersects(rectangulos[k]))
+                    intersects++;
+                else
+                    inside++;
+            }
+        }
+        StdOut.println("Cuadrados que intersectan: " + intersects);
+        StdOut.println("Cuadrados contenidos en otros: " + inside);
     }
 }
