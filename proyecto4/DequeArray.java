@@ -12,8 +12,6 @@ public class DequeArray<Item> implements Iterable<Item>
     //Añadimos las variables que vamos a usar en el TAD
     private Item[]  array = new Item[0];
     private int     count;
-    private int     l_first;
-    private int     r_first;
     
     /* Comprobar todo lo que esta comentado aqui
     private int     iter;   
@@ -25,8 +23,6 @@ public class DequeArray<Item> implements Iterable<Item>
     //Primero crearemos el constructor de dicha clase
     public DequeArray()
     {
-        l_first = 0;
-        r_first = array.length;
         count = 0;
     }
     
@@ -47,6 +43,7 @@ public class DequeArray<Item> implements Iterable<Item>
             n_array[i + 1] = array[i];
         n_array[0] = item;
         array = n_array;
+        count = array.length;
     }
 
     public void pushRight(Item item)
@@ -56,22 +53,21 @@ public class DequeArray<Item> implements Iterable<Item>
             n_array[i] = array[i];
         n_array[n_array.length - 1] = item;
         array = n_array;
+        count = array.length;
     }
 
     public Item popLeft()
     {
         Item toreturn;
-        if (this.isEmpty())
-        {
-            try 
-                { toreturn = array[0]; }
-            catch (Exception e)
-                { toreturn = null; }            
-            Item[] n_array = new Item[array.length - 1];
-            for (int i = 0; i < n_array.length; i++)
-                n_array[i] = array[i + 1];
-            array = n_array;
-        }
+        try 
+            { toreturn = array[0]; }
+        catch (Exception e)
+            { toreturn = null; }            
+        Item[] n_array = new Item[array.length - 1];
+        for (int i = 0; i < n_array.length; i++)
+            n_array[i] = array[i + 1];
+        array = n_array;
+        count = array.length;
         return (toreturn);
     }
 
@@ -86,6 +82,7 @@ public class DequeArray<Item> implements Iterable<Item>
         for (int i = 0; i < n_array.length; i++)
             n_array[i] = array[i];
         array = n_array;
+        count = array.length;
         return (toreturn);
     }
 
