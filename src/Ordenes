@@ -1,0 +1,15 @@
+Put 3 3 W
+Turn 3 3
+Turn 3 3
+Undo
+Put 4 5 B
+Count
+Put 3 4 W
+Undo
+Turn 3 3
+Undo
+Turn 3 3
+Undo
+Put 5 5 B
+Undo
+Count
