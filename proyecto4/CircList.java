@@ -30,6 +30,12 @@ public class CircList<Item>
         return (toreturn);
     }
 
+    public CircList()
+    {
+        cursor = null;
+        count = 0;
+    }
+
     public boolean isEmpty()
     {
         return (cursor == null);

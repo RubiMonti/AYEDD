@@ -1,0 +1,12 @@
+Add La
+Add Re
+Add Mi
+Del
+Add Sol
+Add -
+Nop
+Nop
+Nop
+Nop
+Nop
+Nop
