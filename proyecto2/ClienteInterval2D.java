@@ -70,7 +70,6 @@ public class ClienteInterval2D
         In in = new In(args[0]);
         Double[] points = new Double[4];
         String line;
-        System.err.println("KLK");
         int i = 0;
         Interval1D xInterval;
         Interval1D yInterval;

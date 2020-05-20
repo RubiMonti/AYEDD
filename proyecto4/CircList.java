@@ -112,31 +112,4 @@ public class CircList<Item>
             return (toreturn);
         }
     }
-
-    public static void main(String[] args)
-    {
-        CircList prueba = new CircList();
-
-        System.err.println(prueba.tostring());
-        prueba.insert(5);
-        prueba.insert(10);
-        prueba.insert(15);
-        prueba.insert(25);
-        prueba.insert(50);
-        System.err.println(prueba.tostring());
-        System.err.println(prueba.cursor());
-        System.err.println(prueba.tostring());
-        System.err.println(prueba.forwardCursor());
-        System.err.println(prueba.tostring());
-        System.err.println(prueba.popCursor());
-        System.err.println(prueba.tostring());
-        System.err.println(prueba.forwardCursor());
-        System.err.println(prueba.tostring());
-        System.err.println(prueba.forwardCursor());
-        System.err.println(prueba.tostring());
-        System.err.println(prueba.forwardCursor());
-        System.err.println(prueba.tostring());
-        System.err.println(prueba.forwardCursor());
-        System.err.println(prueba.tostring());
-    }
 }

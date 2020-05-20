@@ -1,0 +1,9 @@
+****************************************
+    Rubén Montilla Fernández
+    Ingeniería de Robotica Software
+    Algoritmos y estructuras de datos
+****************************************
+
+1. En este fragmento podemos ver expoerimentalmente que el bucle mas interno se va a ejecutar 2n - 1 veces por lo que su orden de crecimiento es lineal O(n).
+2. En este fragmento podemos ver tambien como experimentalmente el bucle mas interno se ejecuta n - 1 veces por lo que su orden de crecimiento tambien sera O(n).
+3. En este fragmento de código podemos observar que el bucle interno viene dentro de un par de bucles for anidados, esto en la mayoria de los casos tendria un orden de crecimiento de n² pero si observamos mas detenidamente podemos ver como al estarse multiplicando la i por 2 todo el rato ese bucle for no se ejecuta n veces sino log(n) veces. Es por ello que su orden de crecimiento es de O(n*log(n)).

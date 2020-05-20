@@ -1,0 +1,59 @@
+***************************************
+    Rubén Montilla Fernández
+    Ingeniería de Robotica Software
+    Algoritmos y estructuras de datos
+***************************************
+
+NOTA: Hice un pequeño cambio en SortCompare para que mostrase siempre el mas rapido el primero.
+
++++++++++++++++++++++++++++++++++++++++
+
+En el primer apartado compararemos los algoritmos Shell e Insertion.
+- java -cp .:./algs4.jar -Xint SortCompare Shell Insertion 1000 100:
+For 1000 random Doubles
+    Shell is 6.1 times faster than Insertion
+
+- java -cp .:./algs4.jar -Xint SortCompare Shell Insertion 1000 100 sorted:
+For 1000 random Doubles
+    Insertion is 3.3 times faster than Shell
+
+Podemos ver que shell es mas rapido cuando no estan ordenados ya que hace varias pasadas para que en la pasada final ya esten ordenados y ejecute menos sentencias para ordenarlos, pero al estar ordenados ya de antemano, insertion tarda menos ya que hace una única pasada por el array.
+
++++++++++++++++++++++++++++++++++++++++
+
+Ahora compararemos Insertion con Selection.
+- java -cp .:./algs4.jar -Xint SortCompare Insertion Selection 1000 100:
+For 1000 random Doubles
+    Selection is 1.1 times faster than Insertion
+
+- java -cp .:./algs4.jar -Xint SortCompare Insertion Selection 1000 100 sorted:
+For 1000 random Doubles
+    Insertion is 13.2 times faster than Selection
+
+Se puede ver que en la ejecución normal los algoritmos son casi igual de efectivos ya que ejecutan el bucle interno mas o menos las mismas veces, pero cuando lo ordenamos podemos ver que insertion es mucho mas rapido que selection ya que al estar oredenado insertion realiza muchas menos comparaciones que selection.
+
++++++++++++++++++++++++++++++++++++++++
+
+El siguiente es Binary Insertion con Insertion.
+- java -cp .:./algs4.jar -Xint SortCompare BinaryInsertion Insertion 1000 100:
+For 1000 random Doubles
+    BinaryInsertion is 1.4 times faster than Insertion
+
+- java -cp .:./algs4.jar -Xint SortCompare BinaryInsertion Insertion 1000 100 sorted:
+For 1000 random Doubles
+    Insertion is 4.5 times faster than BinaryInsertion
+
+El binary insertion es mas rapido que el insertion normal ya que va poniendo cada uno en su sitio entonces al estar desordenados hace menos vueltas del bucle, pero al estar ya ordenados, insertion es mas rapido ya que no hace tantas comparaciones.
+
++++++++++++++++++++++++++++++++++++++++
+
+Por último compararemos InsertionX con Insertion.
+- java -cp .:./algs4.jar -Xint SortCompare InsertionX Insertion 1000 100:
+For 1000 random Doubles
+    Insertion is 1.1 times faster than InsertionX
+
+- java -cp .:./algs4.jar -Xint SortCompare InsertionX Insertion 1000 100 sorted:
+For 1000 random Doubles
+    InsertionX is 1.3 times faster than Insertion
+
+Este caso es el más ajustado. He hecho varias pruebas de ambos tests para asegurarme, pero salian todos los resultados muy parejos ya que es el mismo algoritmo solo que en el caso de InsertionX hace una primera pasada para colocar el primer elemento a la izquierda y asi, si no hay movimiento en la primera pasada, salir directamente sin comprobar los demas. Es por eso por lo que es más rapido en sorted. Aún así, los tiempos de ejecución son practicamente iguales.

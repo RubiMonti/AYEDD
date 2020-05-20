@@ -86,8 +86,56 @@ public class DequeArray<Item> implements Iterable<Item>
         return (toreturn);
     }
 
+    private class reg_iterator implements Iterator<Item>
+    {
+        private int i = 0;
+        public boolean hasNext() { return i <= n-1; }
+        public Item next() { return array[i++]; }
+    }
+
+    private class rev_iterator implements Iterator<Item>
+    {
+        private int i = n-1;
+        public boolean hasNext() { return i <= 0; }
+        public Item next() { return array[i--]; }
+    }
+
     public Iterator<Item> iterator()
     {
-
+        return new reg_iterator();
     }
+
+    public Iterator<Item> reverseIterator()
+    {public static void main(String[] args)
+        {
+            DequeList int_deque = new DequeList();
+            int n = 5;
+            DequeList string_deque = new DequeList();
+            String s = "klk";
+            Iterator<String> pepe;
+            
+            System.err.println("Item = " + int_deque.popLeft() + " Count = " + int_deque.size());
+            int_deque.pushLeft(n);
+            int_deque.pushLeft(++n);
+            n = 70;
+            int_deque.pushRight(n);
+            System.err.println("Item = " + int_deque.popLeft() + " Count = " + int_deque.size());
+    
+            System.err.println("Item = " + string_deque.popLeft() + " Count = " + string_deque.size());
+            string_deque.pushLeft(s);
+            s = "Calvooooo";
+            string_deque.pushLeft(s);
+            s= "pelooooooo";
+            string_deque.pushLeft(s);
+            pepe = string_deque.iterator();
+            System.err.println("iterator1 = " + pepe.hasNext());
+            System.err.println("iterator1 = " + pepe.next());
+            System.err.println("iterator2 = " + pepe.hasNext());
+            System.err.println("iterator2 = " + pepe.next());
+            System.err.println("iterator3 = " + pepe.hasNext());
+            System.err.println("iterator3 = " + pepe.next());
+            System.err.println("Item = " + string_deque.popLeft() + " Count = " + string_deque.size());
+            System.err.println("Item = " + string_deque.popLeft() + " Count = " + string_deque.size());
+            System.err.println("Item = " + string_deque.popLeft() + " Count = " + string_deque.size());
+        }
 }

@@ -1,0 +1,13 @@
+****************************************
+    Rubén Montilla Fernández
+    Ingeniería de Robotica Software
+    Algoritmos y estructuras de datos
+****************************************
+
+1. Linear. Ya que predomina la n sobre la ecuación (n + 1).
+2. Constante, ya que predomina el 1 sobre 1/n (1 + 1/n).
+3. Constante, ya que pasa lo mismo que en el apartado anterior ((1 + 1/n)(1 + 2/n)).
+4. Cubica, ya que predomina el 2n^3 (2n^3 - 15n^2 + n).
+5. Constante ya que al fin y al cabo tenderá a uno cuanto mas grande sea la n (lg(2n)/lg(n)).
+6. Constante ya que en este caso tiende a 2 cuanto mas grande sea la n (lg(x^2 + 1)/lg(n)).
+7. Al principio exponencial porque predomina el n^100, pero cuando llega un cierto punto el denominador se hace mas grande que el numerador y empieza a tender a 0, por lo que es constante (n^100 / 2^n)

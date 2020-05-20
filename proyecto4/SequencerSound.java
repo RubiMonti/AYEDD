@@ -119,6 +119,7 @@ public class SequencerSound
         }
         else
         {
+            // No logro conseguir hacer el silencio
             System.err.println("-");
             sleep(((int)duration)/1000);
         }

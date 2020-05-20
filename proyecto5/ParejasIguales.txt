@@ -1,0 +1,10 @@
+****************************************
+    Rubén Montilla Fernández
+    Ingeniería de Robotica Software
+    Algoritmos y estructuras de datos
+****************************************
+
+En el programa ParejasIgualesFuerzaBruta he usado un doble loop que recorre todo el array hasta el final exceptuando un numero cada uno por lo que su funcion de crecimiento sería (n-1)^2 y su orden de crecimiento es n^2.
+En el segundo programa he ordenado los numeros antes de compararlos por lo que solo hay que compararlos con los de los lados, habiendo solo un bucle. Eso hace que el bucle interno no sea el que compara sino el que se usa en array.sort ya que su algoritmo de ordenación es mergesort. por eso su orden de crecimiento es n*log(n).
+
+Para los archivos que tienen el .log he dejado corriendo el programa correspondiente durante un minuto cada uno y lo he metido en el archivo.

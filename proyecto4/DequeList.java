@@ -6,6 +6,7 @@ Este ejercicio consiste en crear un "deque", una pila que pueda ser utilizada po
 Este ejercicio tiene dos archivos, en uno de  ellos la clase se implementa con un array mientras que en el segundo programa
 se usa una lista enlazada.
 */
+import java.util.Iterator;
 
 public class DequeList<Item>
 {
@@ -18,6 +19,7 @@ public class DequeList<Item>
     {
         private Item item;
         private Node next;
+        private Node prev;
     }
 
     public DequeList()
@@ -48,7 +50,7 @@ public class DequeList<Item>
         else
             left.next = old;
         if (left.next == right)
-            right.next = left;
+            right.prev = left;
         count++;
     }
 
@@ -57,12 +59,12 @@ public class DequeList<Item>
         Node old = right;
         right = new Node();
         right.item = item;
-        right.next = null;
+        right.prev = null;
         if (left == null)
             left = right;
         else
-            right.next = old;
-        if (right.next == left)
+            right.prev = old;
+        if (right.prev == left)
             left.next = right;
         count++;
     }
@@ -86,33 +88,48 @@ public class DequeList<Item>
         Item toreturn = right.item;
         if (left == right)
             left = null;
-        right = right.next;
+        right = right.prev;
         count--;
         return (toreturn);
     }
 
-    public static void main(String[] args)
+    private class reg_iterator implements Iterator<Item>
     {
-        DequeList int_deque = new DequeList();
-        int n = 5;
-        DequeList string_deque = new DequeList();
-        String s = "klk";
-        
-        System.err.println("Item = " + int_deque.popLeft() + " Count = " + int_deque.size());
-        int_deque.pushLeft(n);
-        int_deque.pushLeft(++n);
-        n = 70;
-        int_deque.pushRight(n);
-        System.err.println("Item = " + int_deque.popLeft() + " Count = " + int_deque.size());
+        private Node it = left;
+        public boolean hasNext() { return !(it.next == null); }
+        public Item next() 
+        {
+            if (it == null)
+                return null;
+            Item toreturn;
+            toreturn = it.item;
+            it = it.next;
+            return toreturn;
+        }
+    }
 
-        System.err.println("Item = " + string_deque.popLeft() + " Count = " + string_deque.size());
-        string_deque.pushLeft(s);
-        s = "Calvooooo";
-        string_deque.pushLeft(s);
-        s= "pelooooooo";
-        string_deque.pushRight(s);
-        System.err.println("Item = " + string_deque.popRight() + " Count = " + string_deque.size());
-        System.err.println("Item = " + string_deque.popRight() + " Count = " + string_deque.size());
-        System.err.println("Item = " + string_deque.popRight() + " Count = " + string_deque.size());
+    private class rev_iterator implements Iterator<Item>
+    {
+        private Node it = right;
+        public boolean hasNext() { return !(it.prev == null); }
+        public Item next() 
+        {
+            if (it == null)
+                return null;
+            Item toreturn;
+            toreturn = it.item;
+            it = it.prev;
+            return toreturn;
+        }
+    }
+
+    public Iterator<Item> iterator()
+    {
+        return new reg_iterator();
+    }
+
+    public Iterator<Item> reverseIterator()
+    {
+        return new rev_iterator();
     }
 }
